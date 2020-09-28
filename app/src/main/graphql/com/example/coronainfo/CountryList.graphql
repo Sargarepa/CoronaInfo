@@ -1,0 +1,13 @@
+query CountryList {
+    summary {
+        countries {
+            Country_Region
+            Last_Update
+            Confirmed
+            Deaths
+            Recovered
+            NewConfirmed
+            NewDeaths
+        }
+    }
+}
