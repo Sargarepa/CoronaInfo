@@ -9,30 +9,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.setContent
 import androidx.ui.tooling.preview.Preview
 import com.example.coronainfo.ui.CoronaInfoTheme
+import com.example.coronainfo.ui.countrylist.CountryListScreen
+import com.example.coronainfo.ui.countrylist.CountryListViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.koin.android.ext.android.inject
 
+@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity() {
+    val countryListViewModel: CountryListViewModel by inject()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             CoronaInfoTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-                    Greeting("Android")
-                }
+                CoronaInfoApp(countryListViewModel = countryListViewModel)
             }
         }
     }
 }
 
+@ExperimentalCoroutinesApi
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    CoronaInfoTheme {
-        Greeting("Android")
-    }
+fun CoronaInfoApp(countryListViewModel: CountryListViewModel) {
+    CountryListScreen(viewModel = countryListViewModel)
 }
